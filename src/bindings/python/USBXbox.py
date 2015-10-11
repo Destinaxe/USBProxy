@@ -60,13 +60,16 @@ class USBXboxInterfaceOne(USBInterface):
             [ self.endpointOne, self.endpointTwo ],
             descriptors
         )
-
-
+		self.input_counter = 0
+	
 	def handle_buffer_available(self):
-		data = self.endpointTwo.recv()
-		print("Recieved: " + str(data))
-		#test_data = b'\x00\x14\x04\x00\x00\x00\xEE\xFE\x69\x04\xBB\xF4\xCC\xFF\x00\x00\x00\x00\x00\x00'
-		#self.endpointOne.send(test_data)	
+		#data = self.endpointTwo.recv()
+		#print("Recieved: " + str(data))
+		#test_data = b'\x00\x14\xFF\xFF\xFF\xFF\xFF\xFE\x69\x04\xBB\xF4\xCC\xFF\x00\x00\x00\x00\x00\x00'
+		#if self.input_counter < 5:
+		#	self.endpointOne.send(test_data)	
+		#	self.input_counter += 1
+		pass
 
 class USBXboxInterfaceTwo(USBInterface):
 	
