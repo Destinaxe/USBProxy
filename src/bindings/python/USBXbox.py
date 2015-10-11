@@ -1,3 +1,17 @@
+'''
+USBXbox.py
+
+Definitions and Interfaces for an Xbox 360 controller
+'''
+
+
+from USB import *
+from USBDevice import *
+from USBConfiguration import *
+from USBInterface import *
+from USBEndpoint import *
+from keymap import get_keycode
+
 
 
 class USBXboxInterfaceOne(USBInterface)
@@ -7,7 +21,7 @@ class USBXboxInterfaceOne(USBInterface)
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-	 		0x21 : '\x00\x01\x01\x25\x81\x14\x00\x00\x00\x00\x13\x01\x08\x00\x00'
+	 		0x21 : b'\x00\x01\x01\x25\x81\x14\x00\x00\x00\x00\x13\x01\x08\x00\x00'
 		}
 
        self.endpointOne = USBEndpoint(
@@ -57,7 +71,7 @@ class USBXboxInterfaceTwo(USBInterface)
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-			0x21 : 	'\x00\x01\x01\x01\x82\x40\x01\x02\x20\x16\x83\x00\x00\x00\x00\x00\x00\x16\x03\x00\x00\x00\x00\x00\x00'
+			0x21 : 	b'\x00\x01\x01\x01\x82\x40\x01\x02\x20\x16\x83\x00\x00\x00\x00\x00\x00\x16\x03\x00\x00\x00\x00\x00\x00'
 		}
 
        self.endpointOne = USBEndpoint(
@@ -130,7 +144,7 @@ class USBXboxInterfaceThree(USBInterface)
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-			0x21 : '\x00\x01\x01\x22\x84\x07\x00'
+			0x21 : b'\x00\x01\x01\x22\x84\x07\x00'
 		}
 
        self.endpointOne = USBEndpoint(
@@ -168,7 +182,7 @@ class USBXboxInterfaceFour(USBInterface)
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-			0x21 : '\x00\x01\0x01\0x03'
+			0x21 : b'\x00\x01\0x01\0x03'
 		}
 
       	USBInterface.__init__(
@@ -196,7 +210,7 @@ class USBXboxInterfaceFour(USBInterface)
         config = USBConfiguration(
                 1,                                          # index
                 "Xbox 360 Controller",    # string desc
-                [  USBXboxInterfaceOne(),USBXboxInterfaceTwo(),USBXboxInterfaceThree(),USBXboxInterfaceFor() ]         # interfaces
+                [  USBXboxInterfaceOne(),USBXboxInterfaceTwo(),USBXboxInterfaceThree(),USBXboxInterfaceFour() ]         # interfaces
         )
 
         USBDevice.__init__(
