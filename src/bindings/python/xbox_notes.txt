@@ -1,0 +1,150 @@
+
+'''
+Notes and thoughts on the USB Xbox 360 controller
+Ok so looking at the logs it looks like there are 4 total interfaces and one configuration
+The interfaces are constructed as follows.
+
+Pulled em all from the logfiles that we took from the 360.
+
+
+Configuration Descriptor:
+    bLength 9
+    bDescriptorType CONFIGURATION (0x02)
+    wTotalLength    153
+    bNumInterfaces  4
+    bConfigurationValue 1
+    iConfiguration  None (0)
+    bmAttributes.Reserved   0
+    bmAttributes.RemoteWakeup   RemoteWakeup Supported (0b1)
+    bmAttributes.SelfPowered    Bus Powered (0b0)
+    bMaxPower   500mA (0xfa)
+
+Interface One:
+
+    Interface Description:
+        Type: 0x21
+        Data: 00 01 01 25 81 14 00 00 00 00 13 01 08 00 00
+
+    bLength 9
+    bDescriptorType INTERFACE (0x04)
+    bInterfaceNumber    0
+    bAlternateSetting   0
+    bNumEndpoints   2
+    bInterfaceClass Vendor Specific (0xff)
+    bInterfaceSubClass  Unknown (0x5d)
+    bInterfaceProtocol  Unknown (0x01)
+    iInterface  None (0)
+    
+    Endpoint One:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    1 IN (0b10000001)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   4
+
+    Endpoint Two:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    1 OUT (0b00000001)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   8
+
+Interface Two:
+
+    Interface Descriptor:
+        Type: 0x21
+        Data: 00 01 01 01 82 40 01 02 20 16 83 00 00 00 00 00 00 16 03 00 00 00 00 00 00
+    
+    bLength 9
+    bDescriptorType INTERFACE (0x04)
+    bInterfaceNumber    1
+    bAlternateSetting   0
+    bNumEndpoints   4
+    bInterfaceClass Vendor Specific (0xff)
+    bInterfaceSubClass  Unknown (0x5d)
+    bInterfaceProtocol  Unknown (0x03)
+    iInterface  None (0)
+
+    Endpoint 1:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    2 IN (0b10000010)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   2
+
+    Endpoint 2:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    2 OUT (0b00000010)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   4
+
+    Endpoint 3:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    3 IN (0b10000011)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   64
+
+    Endpoint 4:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    3 OUT (0b00000011)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   16
+
+Interface Three:
+    
+    Interface Descriptor:
+        Type: 0x21
+        Data: 00 01 01 22 84 07 00
+
+    bLength 9
+    bDescriptorType INTERFACE (0x04)
+    bInterfaceNumber    2
+    bAlternateSetting   0
+    bNumEndpoints   1
+    bInterfaceClass Vendor Specific (0xff)
+    bInterfaceSubClass  Unknown (0x5d)
+    bInterfaceProtocol  Unknown (0x02)
+    iInterface  None (0)
+
+    Endpoint 1:
+        bLength 7
+        bDescriptorType ENDPOINT (0x05)
+        bEndpointAddress    4 IN (0b10000100)
+        bmAttributes.TransferType   Interrupt (0b11)
+        wMaxPacketSize.PacketSize   32
+        wMaxPacketSize.Transactions One transaction per microframe if HS (0b00)
+        bInterval   16
+
+Interface 4:
+
+    Interface Descriptor:
+        Type: 0x41
+        Data: 0x00 0x01 0x01 0x03
+
+    bLength 9
+    bDescriptorType INTERFACE (0x04)
+    bInterfaceNumber    3
+    bAlternateSetting   0
+    bNumEndpoints   0
+    bInterfaceClass Vendor Specific (0xff)
+    bInterfaceSubClass  Unknown (0xfd)
+    bInterfaceProtocol  Unknown (0x13)
+    iInterface  Xbox Security Method 3, Version 1.00, © 2005 Microsoft Corporation. All rights reserved. (4)
+
+
+
