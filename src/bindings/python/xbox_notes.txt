@@ -1,3 +1,11 @@
+Update 10/11
+
+It seems from looking at the logs that the endpoint that is in charge of most of our functions of interest is endpoint 1
+
+The host sends data to the controller at regular intervals, the controller dosen't seem to do anything with it
+
+So when we get data we just need to read it in and send an ack...
+
 
 '''
 Notes and thoughts on the USB Xbox 360 controller

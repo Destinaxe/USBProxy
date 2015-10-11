@@ -14,17 +14,18 @@ from keymap import get_keycode
 
 
 
-class USBXboxInterfaceOne(USBInterface)
+class USBXboxInterfaceOne(USBInterface):
 	
 	name = "USB Xbox 360 Interface One"
 	
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-	 		0x21 : b'\x00\x01\x01\x25\x81\x14\x00\x00\x00\x00\x13\x01\x08\x00\x00'
+			0x21 : b'\x00\x01\x01\x25\x81\x14\x00\x00\x00\x00\x13\x01\x08\x00\x00'
 		}
 
-       self.endpointOne = USBEndpoint(
+		
+		self.endpointOne = USBEndpoint(
             1,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -33,9 +34,9 @@ class USBXboxInterfaceOne(USBInterface)
             32,      # max packet size
             4,         # polling interval, see USB 2.0 spec Table 9-13
             self.handle_buffer_available    # handler function
-        )
+			)
 
-       self.endpointTwo = USBEndpoint(
+		self.endpointTwo = USBEndpoint(
             1,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -47,7 +48,7 @@ class USBXboxInterfaceOne(USBInterface)
         )
 
 
-      	USBInterface.__init__(
+		USBInterface.__init__(
             self,
             0,          # interface number
             0,          # alternate setting
@@ -64,17 +65,17 @@ class USBXboxInterfaceOne(USBInterface)
 	def handle_buffer_available(self):
 		pass
 
-class USBXboxInterfaceTwo(USBInterface)
+class USBXboxInterfaceTwo(USBInterface):
 	
 	name = "USB Xbox 360 Interface Two"
 	
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-			0x21 : 	b'\x00\x01\x01\x01\x82\x40\x01\x02\x20\x16\x83\x00\x00\x00\x00\x00\x00\x16\x03\x00\x00\x00\x00\x00\x00'
+			0x21 :	b'\x00\x01\x01\x01\x82\x40\x01\x02\x20\x16\x83\x00\x00\x00\x00\x00\x00\x16\x03\x00\x00\x00\x00\x00\x00'
 		}
 
-       self.endpointOne = USBEndpoint(
+		self.endpointOne = USBEndpoint(
             2,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -85,7 +86,7 @@ class USBXboxInterfaceTwo(USBInterface)
             self.handle_buffer_available    # handler function
         )
 
-       self.endpointTwo = USBEndpoint(
+		self.endpointTwo = USBEndpoint(
             2,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -95,7 +96,8 @@ class USBXboxInterfaceTwo(USBInterface)
             4,         # polling interval, see USB 2.0 spec Table 9-13
             self.handle_buffer_available    # handler function
         )
-       self.endpointThree = USBEndpoint(
+		
+		self.endpointThree = USBEndpoint(
             3,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -106,7 +108,7 @@ class USBXboxInterfaceTwo(USBInterface)
             self.handle_buffer_available    # handler function
         )
 
-       self.endpointFour = USBEndpoint(
+		self.endpointFour = USBEndpoint(
             3,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -119,7 +121,7 @@ class USBXboxInterfaceTwo(USBInterface)
 
 
 
-      	USBInterface.__init__(
+		USBInterface.__init__(
             self,
             1,          # interface number
             0,          # alternate setting
@@ -137,7 +139,7 @@ class USBXboxInterfaceTwo(USBInterface)
 		pass
 
 
-class USBXboxInterfaceThree(USBInterface)
+class USBXboxInterfaceThree(USBInterface):
 	
 	name = "USB Xbox 360 Interface Three"
 	
@@ -147,7 +149,7 @@ class USBXboxInterfaceThree(USBInterface)
 			0x21 : b'\x00\x01\x01\x22\x84\x07\x00'
 		}
 
-       self.endpointOne = USBEndpoint(
+		self.endpointOne = USBEndpoint(
             4,          # endpoint number
             USBEndpoint.direction_in,
             USBEndpoint.transfer_type_interrupt,
@@ -158,7 +160,7 @@ class USBXboxInterfaceThree(USBInterface)
             self.handle_buffer_available    # handler function
         )
 
-      	USBInterface.__init__(
+		USBInterface.__init__(
             self,
             2,          # interface number
             0,          # alternate setting
@@ -175,17 +177,17 @@ class USBXboxInterfaceThree(USBInterface)
 	def handle_buffer_available(self):
 		pass
 
-class USBXboxInterfaceFour(USBInterface)
+class USBXboxInterfaceFour(USBInterface):
 	
 	name = "USB Xbox 360 Interface Four"
 	
 	def __init__(self,verbose=10):
 		
 		descriptors = {
-			0x21 : b'\x00\x01\0x01\0x03'
+			0x21 : b'\x00\x01\x01\x03'
 		}
 
-      	USBInterface.__init__(
+		USBInterface.__init__(
             self,
             3,          # interface number
             0,          # alternate setting
@@ -194,7 +196,7 @@ class USBXboxInterfaceFour(USBInterface)
             0x13,          # protocol
             0,          # string index
             verbose,
-            [ self.endpointOne ],
+            [  ],
             descriptors
         )
 
@@ -203,7 +205,7 @@ class USBXboxInterfaceFour(USBInterface)
 		pass
 
 
- class USBXboxControllerDevice(USBDevice):
+class USBXboxControllerDevice(USBDevice):
     name = "USB Xbox 360 Controller"
 
     def __init__(self, maxusb_app, verbose=0, text=None):

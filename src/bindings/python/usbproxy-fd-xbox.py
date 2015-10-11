@@ -2,7 +2,7 @@ from USBProxyApp import USBProxyApp
 from USBXbox import USBXboxControllerDevice
 import sys
 
- u = USBProxyApp(verbose=1)
+u = USBProxyApp(verbose=1)
 XboxController = USBXboxControllerDevice(u,verbose=10)
 XboxController.connect()
 try:
