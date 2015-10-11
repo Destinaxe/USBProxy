@@ -38,7 +38,7 @@ class USBXboxInterfaceOne(USBInterface):
 
 		self.endpointTwo = USBEndpoint(
             1,          # endpoint number
-            USBEndpoint.direction_in,
+            USBEndpoint.direction_out,
             USBEndpoint.transfer_type_interrupt,
             USBEndpoint.sync_type_none,
             USBEndpoint.usage_type_data,
@@ -88,7 +88,7 @@ class USBXboxInterfaceTwo(USBInterface):
 
 		self.endpointTwo = USBEndpoint(
             2,          # endpoint number
-            USBEndpoint.direction_in,
+            USBEndpoint.direction_out,
             USBEndpoint.transfer_type_interrupt,
             USBEndpoint.sync_type_none,
             USBEndpoint.usage_type_data,
@@ -110,7 +110,7 @@ class USBXboxInterfaceTwo(USBInterface):
 
 		self.endpointFour = USBEndpoint(
             3,          # endpoint number
-            USBEndpoint.direction_in,
+            USBEndpoint.direction_out,
             USBEndpoint.transfer_type_interrupt,
             USBEndpoint.sync_type_none,
             USBEndpoint.usage_type_data,
@@ -212,7 +212,7 @@ class USBXboxControllerDevice(USBDevice):
         config = USBConfiguration(
                 1,                                          # index
                 "Xbox 360 Controller",    # string desc
-                [  USBXboxInterfaceOne(),USBXboxInterfaceTwo(),USBXboxInterfaceThree(),USBXboxInterfaceFour() ]         # interfaces
+                [  USBXboxInterfaceOne() ,USBXboxInterfaceTwo(),USBXboxInterfaceThree(),USBXboxInterfaceFour() ]         # interfaces
         )
 
         USBDevice.__init__(
