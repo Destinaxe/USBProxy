@@ -6,6 +6,12 @@ The host sends data to the controller at regular intervals, the controller dosen
 
 So when we get data we just need to read it in and send an ack...
 
+In order to transmit button data, the device must first issue a NAK, process the setup token, and then transmit the data..
+
+1.) Issue NAK
+2.) Transmit data...
+
+How does the keyboard code do this? 
 
 '''
 Notes and thoughts on the USB Xbox 360 controller

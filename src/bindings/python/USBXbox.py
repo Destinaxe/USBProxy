@@ -63,7 +63,10 @@ class USBXboxInterfaceOne(USBInterface):
 
 
 	def handle_buffer_available(self):
-		pass
+		data = self.endpointTwo.recv()
+		print("Recieved: " + str(data))
+		#test_data = b'\x00\x14\x04\x00\x00\x00\xEE\xFE\x69\x04\xBB\xF4\xCC\xFF\x00\x00\x00\x00\x00\x00'
+		#self.endpointOne.send(test_data)	
 
 class USBXboxInterfaceTwo(USBInterface):
 	
