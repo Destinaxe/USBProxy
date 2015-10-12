@@ -43,10 +43,33 @@ Device: 12 01 00 02 ff ff ff 08 ad 1b 16 f0 90 04 01 02 03 01
 		Interface(3):
 			*Alt(0): 09 04 03 00 00 ff fd 13 04
 			   Name: Xbox Security Method 3, Version 1.00, � 2005 Microsoft Corporation. All rights reserved.
-			Other(41): 06 41 00 01 01 03
-
+			   Other(41): 06 41 00 01 01 03
 
 So I will write another USBDevice class and see how this one works out, there were far fewer control transfers from what I could tell.
+
+This is what our current device presents itself as, we will need to add the HID report descriptors and fixup some of the other descriptors
+
+Device: 12 01 00 01 00 00 00 40 0b 61 53 46 12 34 01 02 03 01
+  Manufacturer: Microsoft
+  Product:      Xbox 360 Controller
+  Serial:       00001
+    *Config(1): 09 02 5e 00 04 01 01 e0 01
+       Name: Microsoft
+            Interface(0):
+                *Alt(0): 09 04 00 00 02 ff 5d 01 00
+                        EP(81): 07 05 81 03 00 20 04
+                        EP(01): 07 05 01 03 00 20 08
+            Interface(1):
+                *Alt(0): 09 04 01 00 04 ff 5d 03 00
+                        EP(82): 07 05 82 03 00 20 02
+                        EP(02): 07 05 02 03 00 20 04
+                        EP(83): 07 05 83 03 00 20 40
+                        EP(03): 07 05 03 03 00 20 10
+            Interface(2):
+                *Alt(0): 09 04 02 00 01 ff 5d 02 00
+                        EP(84): 07 05 84 03 00 20 10
+            Interface(3):
+                *Alt(0): 09 04 03 00 00 ff 5d 13 00
 
 Here are the definitions for the data fields that we are interested in...
 
@@ -67,7 +90,7 @@ xbox  = byte 4 = 0x04
 left trigger -> byte 5 -> 0x00 - 0xFF
 right trigger -> byte 6 -> 0x00 - 0xFF
 
-
+All that is left basically is to figure out the report descriptor, which should be relatively easy looking at the traffic from the controller...
 
 Notes and thoughts on the USB Xbox 360 controller
 Ok so looking at the logs it looks like there are 4 total interfaces and one configuration
