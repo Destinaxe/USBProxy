@@ -13,7 +13,62 @@ In order to transmit button data, the device must first issue a NAK, process the
 
 How does the keyboard code do this? 
 
-'''
+Fields for the DATA descriptor for the 360...
+
+Update 10/12
+
+Using USB-MITM I was able to get a better idea of the data fields and what they mean. Also, this is how my madcatz controller presents itself to the xbox 360:
+
+Device: 12 01 00 02 ff ff ff 08 ad 1b 16 f0 90 04 01 02 03 01
+  Manufacturer: Mad Catz, Inc.
+  Product:      MadCatz GamePad
+  Serial:       02BC9005
+	*Config(1): 09 02 99 00 04 01 00 a0 fa
+		Interface(0):
+			*Alt(0): 09 04 00 00 02 ff 5d 01 00
+				HID: 11 21 10 01 01 25 81 14 03 03 03 04 13 02 08 03 03
+				EP(81): 07 05 81 03 20 00 04
+				EP(02): 07 05 02 03 20 00 08
+		Interface(1):
+			*Alt(0): 09 04 01 00 04 ff 5d 03 00
+				HID: 1b 21 10 01 01 01 83 40 01 04 20 16 85 00 00 00 00 00 00 16 05 00 00 00 00 00 00
+				EP(83): 07 05 83 03 20 00 02
+				EP(04): 07 05 04 03 20 00 04
+				EP(85): 07 05 85 03 20 00 40
+				EP(05): 07 05 05 03 20 00 10
+		Interface(2):
+			*Alt(0): 09 04 02 00 01 ff 5d 02 00
+				HID: 09 21 10 01 01 22 86 07 00
+				EP(86): 07 05 86 03 20 00 10
+		Interface(3):
+			*Alt(0): 09 04 03 00 00 ff fd 13 04
+			   Name: Xbox Security Method 3, Version 1.00, � 2005 Microsoft Corporation. All rights reserved.
+			Other(41): 06 41 00 01 01 03
+
+
+So I will write another USBDevice class and see how this one works out, there were far fewer control transfers from what I could tell.
+
+Here are the definitions for the data fields that we are interested in...
+
+Dpad up -> byte 3 -> 0x01
+Dpad down -> byte 3 -> 0x02
+Dpad left -> byte 3 -> 0x04
+Dpad right -> byte 3 -> 0x08
+x -> byte 4 = 0x40
+y = byte 4 = 0x80
+b = byte 4 = 0x20
+a = byte 4 = 0x10
+lb = byte 4 0x01
+bytes 7-10 = left analog stick
+bytes 11-14 = right analogs tick
+select -> byte 3 -> 0x20
+start = byte 3  = 0x10
+xbox  = byte 4 = 0x04
+left trigger -> byte 5 -> 0x00 - 0xFF
+right trigger -> byte 6 -> 0x00 - 0xFF
+
+
+
 Notes and thoughts on the USB Xbox 360 controller
 Ok so looking at the logs it looks like there are 4 total interfaces and one configuration
 The interfaces are constructed as follows.
