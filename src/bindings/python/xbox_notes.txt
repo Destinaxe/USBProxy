@@ -92,6 +92,13 @@ right trigger -> byte 6 -> 0x00 - 0xFF
 
 All that is left basically is to figure out the report descriptor, which should be relatively easy looking at the traffic from the controller...
 
+10/13
+
+Looks like there is no report descriptor, according to this webpage: http://euc.jp/periphs/xbox-controller.en.html
+
+So I'll work on writing the HID version of the XBOX class over the next few days
+
+
 Notes and thoughts on the USB Xbox 360 controller
 Ok so looking at the logs it looks like there are 4 total interfaces and one configuration
 The interfaces are constructed as follows.
